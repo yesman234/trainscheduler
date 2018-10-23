@@ -1,0 +1,160 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Train Times</title>
+  <!-- Bootstrap CSS CDN  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+
+  <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Style to fix the issue of text extending past card length -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+  
+</head>
+
+<body onload="startTime()">
+
+  <div class="container">
+    <!-- Jumbotron -->
+    <div class="jumbotron"id="topper">
+      <h1 class="text-center">Now</h1>
+      <h2 class="text-center">New Train Times</h2>
+      <span id='clock'></span>
+
+    </div>
+
+  <!-- user display from FIREBASE DATABASE -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div id="card-1" class="card-header">
+          <h3>Current Train</h3>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Train Name</th>
+              <th>Destination</th>
+              <th>Frequency (min)</th>
+              <th>Next Arrival</th>
+              <th>Minutes Away</th>
+            </tr>
+          </thead>
+          <tbody id="current-train-list">
+          </tbody>
+        </table>
+      </div>
+
+
+    <!-- Jumbotron for Title -->
+    <div class="jumbotron" style="background-color: #20315A ; color: white;">
+      <h1 class="text-center">
+        <strong>
+          <i class="fa fa-newspaper-o"></i> Train Time Search</strong>
+      </h1>
+    </div>
+
+    <!-- Row for Searching New York Times -->
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+        <!-- First card is for handling the search parameters -->
+        <div class="card">
+          <div class="card-header">
+            <strong>
+              <i class="fa fa-list-alt"></i> Train Schedule </strong>
+          </div>
+          <div class="card-body">
+
+            <!-- Here we create an HTML Form for handling the inputs-->
+            <form role="form">
+
+              <!-- Here we create the text box for capturing the search term-->
+              <div class="form-group">
+                <label for="train-name">Train Name</label>
+                <input type="text" class="form-control" id="train-name">
+              </div>
+
+              <!-- Here we capture the number of records that the user wants to retrieve  -->
+              <div class="form-group">
+                <label for="Destination">Destination</label>
+                <input type="text" class="form-control" id="Destination">
+              </div>
+
+              <!-- Here we capture the Start Year Parameter-->
+              <div class="form-group">
+                <label for="train-time">First Train Time</label>
+                <input type="text" class="form-control" id="train-time">
+              </div>
+
+              <!-- Here we capture the End Year Parameter -->
+              <div class="form-group">
+                <label for="Frequency">Frequency</label>
+                <input type="text" class="form-control" id="Frequency">
+              </div>
+
+              <!-- Here we have our final submit button -->
+              <button type="submit" class="btn btn-default" id="run-search">
+                <i class="fa fa-search"></i> Search</button>
+              <button class="btn btn-default" id="clear-all">
+                <i class="fa fa-trash"></i> Clear Results</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This row will handle all of the retrieved articles -->
+    
+
+          <!-- This main card will hold each of the resulting articles -->
+          
+
+    <!-- Footer Region -->
+    <div class="row">
+      <div class="col-sm-12">
+
+        <!-- Line Break followed by closing -->
+        <hr>
+        <h5 class="text-center">
+          <small>Made with lots and lots of
+            <i class="fa fa-heart"></i>
+          </small>
+        </h5>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- jQuery JS -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+  <!-- Code to the JavaScript File -->
+  <script src="javascript/app.js"></script>
+  <script type="text/javascript" src="javascript/moment.js"></script>
+  <script type="text/javascript">
+    function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('clock').innerHTML =
+        h + ":" + m + ":" + s;
+      var t = setTimeout(startTime, 500);
+    }
+  function checkTime(i) {
+    if (i < 10) { i = "0" + i };
+    return i;
+  }
+  
+</script>
+</body>
+
+</html>
